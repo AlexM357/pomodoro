@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Таймер Помодоро</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1 class="header__title">Таймер Помодоро</h1>
+      </header>
+
+      <section class="card">
+        <div class="timer">
+          <div class="timer__statusRow">
+            <div class="timer__status" id="statusText" aria-live="polite">
+              Готов. Нажмите «Старт».
+            </div>
+            <div class="timer__iteration" id="iterationText">Итерация 1 / 3</div>
+          </div>
+
+          <div class="timer__time" id="timeText" aria-live="polite">00:15:00</div>
+
+          <div class="progress" aria-hidden="true">
+            <div class="progress__bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div class="phaseCard" aria-live="polite">
+          <div class="phaseCard__label" id="phaseName">Работа</div>
+        </div>
+
+        <div class="actions">
+          <button id="startBtn" class="btn btn--primary" type="button">Старт</button>
+          <button id="pauseBtn" class="btn" type="button" disabled>Пауза</button>
+          <button id="resetBtn" class="btn btn--ghost" type="button" disabled>Сброс</button>
+        </div>
+
+        <div class="note" id="hintOnly">
+          Подсказка: в каждой итерации будет два последовательных отсчета с автоматической сменой темы.
+        </div>
+      </section>
+
+      <div id="settingsToast" class="toast" hidden>
+        <div class="toast__overlay" aria-hidden="true"></div>
+        <div class="toast__dialog" role="dialog" aria-modal="true" aria-labelledby="toastTitle">
+          <div class="toast__header">
+            <div class="toast__title" id="toastTitle">Настройки перед стартом</div>
+            <button id="toastCloseBtn" class="toast__close" type="button" aria-label="Закрыть">×</button>
+          </div>
+
+          <div class="toast__body">
+            <div class="field">
+              <label class="label" for="durationMinutes">Период работы(минуты)</label>
+              <div class="controls controls--two">
+                <input
+                  id="durationMinutes"
+                  class="input"
+                  type="number"
+                  inputmode="numeric"
+                  min="1"
+                  max="480"
+                  step="1"
+                  value="15"
+                  aria-describedby="durationError"
+                />
+                <div class="pill" id="durationPretty">00:15</div>
+              </div>
+              <div class="rangeWrap">
+                <input
+                  class="range"
+                  id="durationRange"
+                  type="range"
+                  min="1"
+                  max="480"
+                  step="1"
+                  value="15"
+                  aria-label="Длительность в минутах"
+                />
+              </div>
+              <div class="error" id="durationError"></div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="alternateDurationMinutes">Период отдыха (минуты)</label>
+              <div class="controls controls--two">
+                <input
+                  id="alternateDurationMinutes"
+                  class="input"
+                  type="number"
+                  inputmode="numeric"
+                  min="1"
+                  max="480"
+                  step="1"
+                  value="5"
+                  aria-describedby="alternateDurationError"
+                />
+                <div class="pill" id="alternateDurationPretty">00:05</div>
+              </div>
+              <div class="rangeWrap">
+                <input
+                  class="range"
+                  id="alternateDurationRange"
+                  type="range"
+                  min="1"
+                  max="480"
+                  step="1"
+                  value="5"
+                  aria-label="Дополнительная длительность в минутах"
+                />
+              </div>
+              <div class="error" id="alternateDurationError"></div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="cycles">Циклы повторения</label>
+              <div class="controls controls--two">
+                <input
+                  id="cycles"
+                  class="input"
+                  type="number"
+                  inputmode="numeric"
+                  min="1"
+                  max="8"
+                  step="1"
+                  value="3"
+                  aria-describedby="cyclesError"
+                />
+                <div class="pill" id="cyclesPretty">3</div>
+              </div>
+              <div class="rangeWrap">
+                <input
+                  class="range"
+                  id="cyclesRange"
+                  type="range"
+                  min="1"
+                  max="8"
+                  step="1"
+                  value="3"
+                  aria-label="Количество циклов"
+                />
+              </div>
+              <div class="error" id="cyclesError"></div>
+            </div>
+          </div>
+
+          <div class="toast__actions">
+            <button id="toastCancelBtn" class="btn" type="button">Отмена</button>
+            <button id="toastStartBtn" class="btn btn--primary" type="button">Старт</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__text">
+          Работает локально в браузере. Без бэка и без регистрации.
+        </div>
+      </footer>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
